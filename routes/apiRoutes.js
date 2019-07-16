@@ -1,24 +1,25 @@
 var db = require("../models");
 
-module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
+module.exports = function (app) {
+  app.get("/api/resorts", function (req, res) {
+    db.Resort.findAll({}).then(function (dbResorts) {
+      res.json(dbResorts);
     });
   });
 
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+  // Create a new resorts table
+  app.post("/api/resorts", function (req, res) {
+    console.log("backend post", req.body);
+    db.Resort.create(req.body).then(function (dbResort) {
+      console.log("dbResort", dbResort.dataValues);
+      res.json(dbResort);
     });
   });
 
   // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
+  app.delete("/api/resorts/:id", function (req, res) {
+    db.Resort.destroy({ where: { id: req.params.id } }).then(function (dbResort) {
+      res.json(dbResort);
     });
   });
 };

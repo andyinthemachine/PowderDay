@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "exampledb",
+    "database": "resortdb",
     "host": "localhost",
     "dialect": "mysql",
     "port":8889
