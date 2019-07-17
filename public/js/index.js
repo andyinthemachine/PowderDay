@@ -32,7 +32,6 @@ var API = {
 
 var refreshResorts = function() {
   API.getResorts().then(function(data) {
-    console.log(data);
     var $resorts = data.map(function(resort) {
       console.log(resort.name);
       var $a = $("<a>").text(resort.name).attr("href", "/resort/" + resort.id);

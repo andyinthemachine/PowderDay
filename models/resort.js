@@ -10,6 +10,14 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       validate: { len: [1, 255] }
     },
+    lat:{ 
+      type: DataTypes.DECIMAL(9, 6),
+      allowNull: false,
+    }, 
+     long:{ 
+      type: DataTypes.DECIMAL(9, 6),
+      allowNull: false,
+    },
     drive_time: DataTypes.INTEGER,
     current_day_weather: DataTypes.STRING,
     snowfall: DataTypes.INTEGER,

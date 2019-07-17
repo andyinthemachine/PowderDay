@@ -9,7 +9,6 @@ module.exports = function (app) {
 
   // Create a new resorts table
   app.post("/api/resorts", function (req, res) {
-    console.log("backend post", req.body);
     db.Resort.create(req.body).then(function (dbResort) {
       console.log("dbResort", dbResort.dataValues);
       res.json(dbResort);
