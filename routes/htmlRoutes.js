@@ -5,7 +5,7 @@ module.exports = function (app) {
   app.get("/", function (req, res) {
     db.Resort.findAll({}).then(function (dbResorts) {
       res.render("index", {
-        msg: "----------------",
+        msg: "",
         resorts: dbResorts
       });
     });

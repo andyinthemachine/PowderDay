@@ -1,6 +1,6 @@
 // Get references to page elements
 var $resortName = $("#resort-name");
-var $resortRank = $("#resort-rank");
+var $resortLink = $("#resort-link");
 var $submitBtn = $("#submit");
 var $resortList = $("#resort-list");
 
@@ -53,11 +53,11 @@ var handleFormSubmit = function(event) {
 
   var resort = {
     name: $resortName.val().trim(),
-    rank: $resortRank.val().trim()
+    link: $resortLink.val().trim()
   };
 
-  if (!(resort.name && resort.rank)) {
-    alert("Enter a resort name and rank");
+  if (!(resort.name && resort.link)) {
+    alert("Enter a resort name and link");
     return;
   }
 
@@ -66,19 +66,14 @@ var handleFormSubmit = function(event) {
   });
 
   $resortName.val("");
-  $resortRank.val("");
+  $resortLink.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
 var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
-
-  API.deleteResort(idToDelete).then(function() {
-    refreshResorts();
-  });
+  var idToDelete = $(this).parent().attr("data-id");
+  API.deleteResort(idToDelete).then(function() {refreshResorts();});
 };
 
 // Add event listeners to the submit and delete buttons
