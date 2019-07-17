@@ -1,7 +1,23 @@
 module.exports = function(sequelize, DataTypes) {
   var Resort = sequelize.define("Resort", {
-    name: DataTypes.STRING,
-    link: DataTypes.STRING,
+    name: { 
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: { len: [1, 140] }
+    },
+    link:{ 
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: { len: [1, 255] }
+    },
+    lat:{ 
+      type: DataTypes.DECIMAL(9, 6),
+      allowNull: false,
+    }, 
+     long:{ 
+      type: DataTypes.DECIMAL(9, 6),
+      allowNull: false,
+    },
     drive_time: DataTypes.INTEGER,
     current_day_weather: DataTypes.STRING,
     snowfall: DataTypes.INTEGER,
@@ -9,3 +25,4 @@ module.exports = function(sequelize, DataTypes) {
   });
   return Resort;
 };
+
