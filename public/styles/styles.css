@@ -1,3 +1,16 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+#map {
+  height: 100%;
+  width: 40%;
+  float:right;
+  background-color: gray;
+}
+html,
+body {
+  height: 75%;
+  margin: 0;
+  padding: 0;
+}
