@@ -3,14 +3,23 @@
 }
 
 #map {
-  height: 100%;
-  width: 40%;
-  float:right;
-  background-color: gray;
+  height: 500px;
+  /* width: 500px; */
+  /* float:right; */
+  /* background-color: gray; */
+  /* opacity: 0%; */
 }
-html,
+
+/* html,
 body {
   height: 75%;
   margin: 0;
   padding: 0;
-}
+} */
+
+#home {background-image: url("https://media1.giphy.com/media/ngcnCL7tHBgiY/giphy.gif?cid=790b76115d2f75d67535427055ae6172&rid=giphy.gif");}
+  
+/* div {
+  background-image: url("https://media1.giphy.com/media/ngcnCL7tHBgiY/giphy.gif?cid=790b76115d2f75d67535427055ae6172&rid=giphy.gif");
+} */
+  

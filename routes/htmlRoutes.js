@@ -1,8 +1,33 @@
 var db = require("../models");
+var axios = require("axios");
+
+require("dotenv").config();
+var keys = require("../keys.js");
+
 
 module.exports = function (app) {
   // Load index page
   app.get("/", function (req, res) {
+    // console.log("Here 1");
+
+    // axios.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&keyword=skiresort&key=AIzaSyDVPvQqd6kA0zXrwQQFnNGk3Map3fgM39Y")
+    // .then(function(response) { 
+    //   console.log("response: ", response.data);
+    // })
+    // .catch(function(error) {
+    //     if (error.response) {
+    //       console.log(error.response.data);
+    //       console.log(error.response.status);
+    //       console.log(error.response.headers);
+    //     } else if (error.request) {
+    //       console.log(error.request);
+    //     } else {
+    //       console.log("Error", error.message);
+    //     }
+    //     console.log(error.config);
+    // });
+
+    // console.log("Page load");
     db.Resort.findAll({}).then(function (dbResorts) {
       res.render("index", {
         msg: "",
@@ -23,4 +48,18 @@ module.exports = function (app) {
     res.render("404");
   });
 };
-2
+
+axios.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&keyword=ski+resort&key=AIzaSyDVPvQqd6kA0zXrwQQFnNGk3Map3fgM39Y")
+.then(function(response) { console.log(response.data); })
+  .catch(function(error) {
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      console.log(error.request);
+    } else {
+      console.log("Error", error.message);
+    }
+    console.log(error.config);
+  });

@@ -1,10 +1,61 @@
 <div id="home">
+  <nav class="navbar navbar-dark bg-primary p-3 mb-2 bg-info text-white rounded">
+    <a class="navbar-brand text-uppercase font-weight-bold">Powder Day 🎿 go get yours</a>
+  </nav>
+  <header>
+    <div class="header">
+      <h3 class="display-3  text-center text-uppercase font-weight-bold text-white"
+        style="font-family: 'Ubuntu', sans-serif">
+        🏂 Find the best conditions ⛷
+      </h3>
+
+      <div class="header">
+        <h4 class="display-5 text-white text-center text-uppercase font-weight-bold"
+          style="font-family: 'Ubuntu', sans-serif">
+          Power Day will lead you there!
+        </h4>
+
+        <div class="card text-center m-3" style="font-family: 'Ubuntu', sans-serif">
+          <div class="card-header text-black">
+            Pray for Pow
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
   <div class="container">
     <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>Powder Day</h2>
-        <form class="clearfix mb-4" action="POST">
+      <div class="col-8">
+
+        <ul id="resort-list" class="list-group">
+          {{#each resorts}}
+          <li data-id="{{this.id}}" class="list-group-item">
+            <a href="resort/{{this.id}}">{{this.name}}</a>
+            <button class="btn btn-danger float-right delete">ｘ</button>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="col-4">
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- <div id="map" class="col-4"></div> --}}
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVPvQqd6kA0zXrwQQFnNGk3Map3fgM39Y&callback=initMap&libraries=places"></script>
+
+<script src="/js/index.js"></script>
+<script src="/js/maps.js"></script>
+
+
+{{!-- <form class="clearfix mb-4" action="POST">
           <div class="form-group">
             <label for="resort-name">Enter Resort:</label>
             <input type="text" id="resort-name" class="form-control" aria-describedby="resort-name"
@@ -16,26 +67,4 @@
               placeholder="Enter Resort Link">
           </div>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Resort list:</h3>
-        <ul id="resort-list" class="list-group">
-          {{#each resorts}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="resort/{{this.id}}">{{this.name}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="map"></div>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVPvQqd6kA0zXrwQQFnNGk3Map3fgM39Y&callback=initMap&libraries=places"></script>
-  
-<script src="/js/index.js"></script>
-<script src="/js/maps.js"></script>
+        </form> --}}
