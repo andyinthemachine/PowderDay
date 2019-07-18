@@ -6,7 +6,6 @@ var $resortList = $("#resort-list");
 
 var API = {
   saveResort: function(resort) {
-    // console.log(resort);
     return $.ajax({
       headers: {
         "Content-Type": "application/json"

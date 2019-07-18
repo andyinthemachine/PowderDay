@@ -7,14 +7,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     link:{ 
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: { len: [1, 255] }
     },
     lat:{ 
       type: DataTypes.DECIMAL(9, 6),
       allowNull: false,
     }, 
-     long:{ 
+     lng:{ 
       type: DataTypes.DECIMAL(9, 6),
       allowNull: false,
     },
