@@ -65,7 +65,7 @@ function initMap() {
 
         service.findPlaceFromQuery(request, function (results, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
-                ski_areas.push(new Ski_area(results[0].name, results[0].geometry.location.lat(), results[0].geometry.location.lng()));
+                ski_areas.push(new Ski_area(area, results[0].geometry.location.lat(), results[0].geometry.location.lng()));
                 createMarker(results[0]);
             }
             // else
@@ -90,7 +90,10 @@ $("#map").on("click", "#select-button", function () {
         var resort = {
             name: resort_name,
             lat: ski_areas[i].lat,
-            lng: ski_areas[i].lng
+            lng: ski_areas[i].lng,
+            weather: "snowy",
+            snowfall: 12,
+            snowfall_pred: 6
         };
 
         API.saveResort(resort).then(function () {

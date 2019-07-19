@@ -2,7 +2,8 @@
 // var $resortName = $("#resort-name");
 // var $resortLink = $("#resort-link");
 // var $submitBtn = $("#submit");
-var $resortList = $("#resort-list");
+// var $resortList = $("#resort-list");
+var $resortList = $(".table-body");
 
 var API = {
   saveResort: function(resort) {
@@ -31,25 +32,37 @@ var API = {
 
 var refreshResorts = function() {
   API.getResorts().then(function(data) {
-    console.log(data);
     var $resorts = data.map(function(resort) {
-      console.log(resort.name);
-      console.log(resort.lat);
-      var $a = $("<a>").text(resort.name).attr("href", "/resort/" + resort.id);
 
-      var $li = $("<li>").attr({class: "list-group-item","data-id": resort.id}).append($a);
+      // var $a = $("<a>").text(resort.name).attr("href", "/resort/" + resort.id);
+      // var $li = $("<li>").attr({class: "list-group-item","data-id": resort.id}).append($a);
+      // $li.append(`<h6> weather: ${resort.weather} <h6>`);
+      // $li.append(`<h6> snowfall: ${resort.snowfall} <h6>`);
+      // $li.append(`<h6> snowfall predicted: ${resort.snowfall_pred} <h6>`);
 
-      $li.append(toString(resort.lat));
-      $li.append(toString(resort.lng));
+      var newRow = $("<tr>").append(
+        $("<td>").html(`<strong>${resort.name}</strong>`),
+        $("<td>").html(`<strong>${resort.weather}</strong>`),
+        $("<td>").html(`<strong>${resort.snowfall}</strong>`),
+        $("<td>").html(`<strong>${resort.snowfall_pred}</strong>`)
+      );
 
-      var $button = $("<button>").addClass("btn btn-danger float-right delete").text("ｘ");
-      $li.append($button);
-      return $li;
+      // $(".table-body").append(newRow);
+
+      // var $button = $("<button>").addClass("btn btn-danger float-right delete").text("ｘ");
+      // newRow.append($button);
+      // $li.append($button);
+      // return $li;
+      return newRow;
     });
     $resortList.empty();
     $resortList.append($resorts);
   });
 };
+
+
+
+
 
 // handleFormSubmit is called whenever we submit a new resort
 // Save the new resort to the db and refresh the list

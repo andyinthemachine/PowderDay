@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
     drive_time: DataTypes.INTEGER,
-    current_day_weather: DataTypes.STRING,
+    weather: DataTypes.STRING,
     snowfall: DataTypes.INTEGER,
     snowfall_pred: DataTypes.INTEGER,
   });
