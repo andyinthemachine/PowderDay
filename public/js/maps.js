@@ -98,6 +98,7 @@ $("#map").on("click", "#select-button", function () {
         console.log("resort not found");
 });
 
+initMap();
 
 
 
