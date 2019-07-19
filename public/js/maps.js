@@ -76,7 +76,7 @@ function initMap() {
 
 $("#map").on("click", "#select-button", function () {
 
-    console.log("Select-button: ", $(this).attr("data-name"));
+    // console.log("Select-button: ", $(this).attr("data-name"));
 
     var resort_name = $(this).attr("data-name");
 
