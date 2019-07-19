@@ -34,8 +34,8 @@
           <tbody class="table-body" class="col-sm-8">
 
             {{#each resorts}}
-            <tr>
-              <td><a style=color:red href="resort/{{this.id}}"><strong>{{this.name}}</strong></td>,
+            <tr class="resort-table">
+              <td><a class="resort-link" href="resort/{{this.id}}"><strong>{{this.name}}</strong></td>,
               <td><strong>{{this.weather}}</strong></td>,
               <td><strong>{{this.snowfall}}</strong></td>,
               <td><strong>{{this.snowfall_pred}}</strong></td>
@@ -52,10 +52,9 @@
   </div>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVPvQqd6kA0zXrwQQFnNGk3Map3fgM39Y&callback=initMap&libraries=places"></script>
-
-  <script src="/js/index.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVPvQqd6kA0zXrwQQFnNGk3Map3fgM39Y&callback=initMap&libraries=places"></script>
+  
+ <script src="/js/index.js"></script>
   <script src="/js/maps.js"></script>
 
 

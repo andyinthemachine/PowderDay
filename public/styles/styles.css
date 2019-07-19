@@ -4,10 +4,14 @@
 
 #map {
   height: 500px;
-  /* width: 500px; */
-  /* float:right; */
-  /* background-color: gray; */
-  /* opacity: 0%; */
+
+}
+.resort-table{
+  font-size: 20px;
+}
+
+.resort-link{
+  color: red;
 }
 
 /* html,
@@ -19,7 +23,5 @@ body {
 
 #home {background-image: url("https://media1.giphy.com/media/ngcnCL7tHBgiY/giphy.gif?cid=790b76115d2f75d67535427055ae6172&rid=giphy.gif");}
   
-/* div {
-  background-image: url("https://media1.giphy.com/media/ngcnCL7tHBgiY/giphy.gif?cid=790b76115d2f75d67535427055ae6172&rid=giphy.gif");
-} */
+
   

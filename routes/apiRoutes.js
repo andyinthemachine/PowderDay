@@ -1,4 +1,6 @@
 var db = require("../models");
+var keys = require("../keys.js");
+
 
 module.exports = function (app) {
   app.get("/api/resorts", function (req, res) {
@@ -20,5 +22,11 @@ module.exports = function (app) {
     db.Resort.destroy({ where: { id: req.params.id } }).then(function (dbResort) {
       res.json(dbResort);
     });
+  });
+
+  // Return Google API key (works but not using)
+  app.get("/api/resorts/key", function (req, res) {
+    // console.log(keys.google_maps.api_key);
+      res.json(keys.google_maps.api_key);
   });
 };

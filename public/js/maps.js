@@ -1,7 +1,5 @@
 
 
-
-
 var ski_areas = [];
 
 function initMap() {
@@ -76,10 +74,7 @@ function initMap() {
 
 $("#map").on("click", "#select-button", function () {
 
-    // console.log("Select-button: ", $(this).attr("data-name"));
-
     var resort_name = $(this).attr("data-name");
-
     found = false;
     i = 0;
     while (!found && i < ski_areas.length)

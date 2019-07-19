@@ -23,14 +23,30 @@ var API = {
       url: "api/resorts/" + id,
       type: "DELETE"
     });
-  }
+  },
+  getKey: function(id) {  // works but not
+    return $.ajax({
+      url: "api/resorts/key",
+      type: "GET"
+    });
+  }  
 };
+
+
+// API.getKey().then(function(data){
+  // console.log(data);
+  // $("#google-init").attr("src", "'https://maps.googleapis.com/maps/api/js?key=' + data + '&callback=initMap&libraries=places'");
+// });
+
 
 var refreshResorts = function() {
   API.getResorts().then(function(data) {
     var $resorts = data.map(function(resort) {
 
-      var newRow = $("<tr>").append(
+      var newRow = $("<tr>").addClass("resort-table");
+
+      // var newRow = $("<tr>").append(
+        newRow.append(
         $("<td>").html(`<a style=color:red href=/resort/${resort.id}><strong>${resort.name}</strong>`),
         $("<td>").html(`<strong>${resort.weather}</strong>`),
         $("<td>").html(`<strong>${resort.snowfall}</strong>`),
@@ -44,13 +60,11 @@ var refreshResorts = function() {
   });
 };
 
-
 var handleDeleteBtnClick = function() {
   console.log("click");
   var idToDelete = $(this).parent().attr("data-id");
   console.log(idToDelete);
   API.deleteResort(idToDelete).then(function() {refreshResorts();});
 };
-
 
 $resortList.on("click", ".delete", handleDeleteBtnClick);
