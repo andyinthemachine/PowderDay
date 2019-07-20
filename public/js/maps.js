@@ -66,10 +66,10 @@ function initMap() {
                 ski_areas.push(new Ski_area(area, results[0].geometry.location.lat(), results[0].geometry.location.lng()));
                 createMarker(results[0]);
             }
-            // else
-            // console.log(area + " not found");
+            else
+                console.log(area + " not found");
         });
-    });
+    })
 }
 
 $("#map").on("click", "#select-button", function () {
@@ -82,6 +82,15 @@ $("#map").on("click", "#select-button", function () {
             found = true;
 
     if (found) {
+        var lat_lng = {
+            lat: ski_areas[i].lat,
+            lng: ski_areas[i].lng
+        };
+
+        API.getWeather(lat_lng).then(function (data) {
+            console.log(data);
+        });
+
         var resort = {
             name: resort_name,
             lat: ski_areas[i].lat,
@@ -90,7 +99,6 @@ $("#map").on("click", "#select-button", function () {
             snowfall: 12,
             snowfall_pred: 6
         };
-
         API.saveResort(resort).then(function () {
             refreshResorts();
         });
@@ -99,6 +107,8 @@ $("#map").on("click", "#select-button", function () {
 });
 
 initMap();
+
+
 
 
 
