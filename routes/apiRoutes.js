@@ -1,7 +1,9 @@
 var db = require("../models");
 var keys = require("../keys.js");
 var axios = require("axios");
+var moment = require('moment');
 
+moment().format();
 
 
 
@@ -12,11 +14,12 @@ module.exports = function (app) {
     });
   });
 
-  // Create a new resorts table
+  // Create a new resorts table row
   app.post("/api/resorts", function (req, res) {
-    db.Resort.create(req.body).then(function (dbResort) {
-      // console.log("dbResort", dbResort.dataValues);
-      res.json(dbResort);
+    weather_api(req.body, function (resort) {
+      db.Resort.create(resort).then(function (dbResort) {
+        res.json(dbResort);
+      });
     });
   });
 
@@ -26,26 +29,27 @@ module.exports = function (app) {
       res.json(dbResort);
     });
   });
+}
 
-  // Return weather data
-  app.post("/api/resorts/weather", function (req, res) {
-    console.log(req.body);
-    // axios.get("https://api.darksky.net/forecast/50abca137dd320d83a18e991c69af6a7/42.3601,-71.0589")
-    //   .then(function (response) {
-    //     console.log(response.data);
-    //     res.json(response.data);
-    //   })
-    //   .catch(function (error) {
-    //     if (error.response) {
-    //       console.log(error.response.data);
-    //       console.log(error.response.status);
-    //       console.log(error.response.headers);
-    //     } else if (error.request) {
-    //       console.log(error.request);
-    //     } else {
-    //       console.log("Error", error.message);
-    //     }
-    //     console.log(error.config);
-    //   });
-  });
-};
+
+function weather_api(resort, cb) {
+  console.log("dskey: ", keys.dark_skies.api_key);
+  console.log(resort.lat.toFixed(6), resort.lng.toFixed(6));
+
+  var url = `https://api.darksky.net/forecast/${keys.dark_skies.api_key}/${resort.lat.toFixed(6)},${resort.lng.toFixed(6)}`;
+  axios.get(url).then(function (response) {
+    console.log(response.data.currently.summary);
+    resort.weather = response.data.currently.summary;
+    cb(resort);
+  })
+    .catch(function (error) {
+      if (error.response)
+        console.log(error.response);
+      else if (error.request)
+        console.log(error.request);
+      else
+        console.log("Error", error.message);
+
+      console.log(error.config);
+    });
+}

@@ -17,9 +17,9 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
     drive_time: DataTypes.INTEGER,
-    weather: DataTypes.STRING,
-    snowfall: DataTypes.INTEGER,
-    snowfall_pred: DataTypes.INTEGER,
+    current_conditions: DataTypes.STRING,
+    precip_prev_day: DataTypes.STRING,
+    precip_forcast: DataTypes.STRING,
   });
   return Resort;
 };
