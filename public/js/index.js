@@ -24,19 +24,16 @@ var API = {
       type: "DELETE"
     });
   },
-  getKey: function(id) {  // works but not
+  getWeather: function(lat_lng) {  
     return $.ajax({
-      url: "api/resorts/key",
-      type: "GET"
+      url: "api/resorts/weather",
+      type: "POST",
+      data: JSON.stringify(lat_lng)
     });
   }  
 };
 
 
-// API.getKey().then(function(data){
-  // console.log(data);
-  // $("#google-init").attr("src", "'https://maps.googleapis.com/maps/api/js?key=' + data + '&callback=initMap&libraries=places'");
-// });
 
 
 var refreshResorts = function() {

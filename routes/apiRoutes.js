@@ -1,5 +1,8 @@
 var db = require("../models");
 var keys = require("../keys.js");
+var axios = require("axios");
+
+
 
 
 module.exports = function (app) {
@@ -12,7 +15,7 @@ module.exports = function (app) {
   // Create a new resorts table
   app.post("/api/resorts", function (req, res) {
     db.Resort.create(req.body).then(function (dbResort) {
-      console.log("dbResort", dbResort.dataValues);
+      // console.log("dbResort", dbResort.dataValues);
       res.json(dbResort);
     });
   });
@@ -24,9 +27,25 @@ module.exports = function (app) {
     });
   });
 
-  // Return Google API key (works but not using)
-  app.get("/api/resorts/key", function (req, res) {
-    // console.log(keys.google_maps.api_key);
-      res.json(keys.google_maps.api_key);
+  // Return weather data
+  app.post("/api/resorts/weather", function (req, res) {
+    console.log(req.body);
+    // axios.get("https://api.darksky.net/forecast/50abca137dd320d83a18e991c69af6a7/42.3601,-71.0589")
+    //   .then(function (response) {
+    //     console.log(response.data);
+    //     res.json(response.data);
+    //   })
+    //   .catch(function (error) {
+    //     if (error.response) {
+    //       console.log(error.response.data);
+    //       console.log(error.response.status);
+    //       console.log(error.response.headers);
+    //     } else if (error.request) {
+    //       console.log(error.request);
+    //     } else {
+    //       console.log("Error", error.message);
+    //     }
+    //     console.log(error.config);
+    //   });
   });
 };
