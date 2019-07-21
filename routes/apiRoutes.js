@@ -43,6 +43,8 @@ function weather_api(resort, cb) {
   axios.get(url_today).then(function (response) {
     var res = response.data;
 
+    console.log(resort.name);
+    console.log(url_today);
     resort.current_conditions = res.currently.summary;
 
     var forecast_str = "no precipitation";
@@ -58,8 +60,8 @@ function weather_api(resort, cb) {
     date_str = `,${moment(prev_day).format("YYYY")}-${moment(prev_day).format("MM")}-${moment(prev_day).format("DD")}`;
     var url_prev_day = url + date_str + time_str;
 
-    console.log(resort.name);
-    console.log(url_prev_day);
+    // console.log(resort.name);
+    // console.log(url_prev_day);
 
     axios.get(url_prev_day).then(function (response2) {
       var res2 = response2.data;
