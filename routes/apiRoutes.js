@@ -33,11 +33,12 @@ function weather_api(resort, cb) {
 
   // [YYYY]-[MM]-[DD]T[HH]:[MM]:[SS]
   var url = `https://api.darksky.net/forecast/${keys.dark_skies.api_key}/${resort.lat.toFixed(6)},${resort.lng.toFixed(6)}`;
-  var time_str = "T12:00:00"
   var current_day = moment();
 
   //api hit for today
   var date_str = `,${moment(current_day).format("YYYY")}-${moment(current_day).format("MM")}-${moment(current_day).format("DD")}`;
+  var time_str = `T${moment(current_day).format("HH")}:${moment(current_day).format("mm")}:${moment(current_day).format("ss")}`;
+
   var url_today = url + date_str + time_str;
 
   axios.get(url_today).then(function (response) {
@@ -58,6 +59,8 @@ function weather_api(resort, cb) {
     // api hit for prev day
     var prev_day = moment(current_day).subtract(1, "days");
     date_str = `,${moment(prev_day).format("YYYY")}-${moment(prev_day).format("MM")}-${moment(prev_day).format("DD")}`;
+    time_str = "T12:00:00";
+
     var url_prev_day = url + date_str + time_str;
 
     // console.log(resort.name);
