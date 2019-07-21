@@ -44,8 +44,9 @@ function weather_api(resort, cb) {
   axios.get(url_today).then(function (response) {
     var res = response.data;
 
-    console.log(resort.name);
-    console.log(url_today);
+    // console.log(resort.name);
+    // console.log(url_today);
+
     resort.current_conditions = res.currently.summary;
 
     var forecast_str = "no precipitation";
