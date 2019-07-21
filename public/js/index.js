@@ -41,9 +41,9 @@ var refreshResorts = function () {
       var newRow = $("<tr>").addClass("resort-table");
       newRow.append(
         $("<td>").html(`<a style=color:red href=/resort/${resort.id}><strong>${resort.name}</strong>`),
-        $("<td>").html(`<strong>${resort.weather}</strong>`),
-        $("<td>").html(`<strong>${resort.snowfall}</strong>`),
-        $("<td>").html(`<strong>${resort.snowfall_pred}</strong>`),
+        $("<td>").html(`<strong>${resort.current_conditions}</strong>`),
+        $("<td>").html(`<strong>${resort.precip_prev_day}</strong>`),
+        $("<td>").html(`<strong>${resort.precip_forecast}</strong>`),
         $("<td>").attr({ "data-id": resort.id }).html(`<button class="btn btn-warning delete">ｘ</button></td>`)
       );
       return newRow;

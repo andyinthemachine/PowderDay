@@ -100,6 +100,7 @@ $("#map").on("click", "#select-button", function () {
             // snowfall: 12,
             // snowfall_pred: 6
         };
+        console.log(resort);
         API.saveResort(resort).then(function() {refreshResorts()});
     } else
         console.log("resort not found");

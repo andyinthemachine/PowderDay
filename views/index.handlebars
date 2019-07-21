@@ -26,9 +26,9 @@
           <thead>
             <tr>
               <th><strong> NAME</strong></th>
-              <th><strong> WEATHER</strong></th>
-              <th><strong> SNOW</strong></th>
-              <th><strong> SNOW COMING</strong></th>
+              <th><strong> NOW</strong></th>
+              <th><strong> YESTERDAY</strong></th>
+              <th><strong> TODAY</strong></th>
             </tr>
           </thead>
           <tbody class="table-body" class="col-sm-8">
@@ -36,9 +36,9 @@
             {{#each resorts}}
             <tr class="resort-table">
               <td><a class="resort-link" href="resort/{{this.id}}"><strong>{{this.name}}</strong></td>,
-              <td><strong>{{this.weather}}</strong></td>,
-              <td><strong>{{this.snowfall}}</strong></td>,
-              <td><strong>{{this.snowfall_pred}}</strong></td>
+              <td><strong>{{this.current_conditions}}</strong></td>,
+              <td><strong>{{this.precip_prev_day}}</strong></td>,
+              <td><strong>{{this.precip_forecast}}</strong></td>
               <td data-id="{{this.id}}"><button class="btn btn-warning delete">ｘ</button></td>
             </tr>
             {{/each}}

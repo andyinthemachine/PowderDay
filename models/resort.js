@@ -16,10 +16,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DECIMAL(9, 6),
       allowNull: false,
     },
-    drive_time: DataTypes.INTEGER,
+    drive_time: DataTypes.STRING,
     current_conditions: DataTypes.STRING,
     precip_prev_day: DataTypes.STRING,
-    precip_forcast: DataTypes.STRING,
+    precip_forecast: DataTypes.STRING
   });
   return Resort;
 };
