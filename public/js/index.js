@@ -24,15 +24,7 @@ var API = {
       type: "DELETE"
     });
   }
-  // getWeather: function (lat_lng) {
-  //   return $.ajax({
-  //     url: "api/resorts/weather",
-  //     type: "POST",
-  //     data: JSON.stringify(lat_lng)
-  //   });
-  // }
 };
-
 
 var refreshResorts = function () {
   API.getResorts().then(function (data) {

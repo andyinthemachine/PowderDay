@@ -83,22 +83,10 @@ $("#map").on("click", "#select-button", function () {
 
     if (found) {
 
-        // var lat_lng = {
-        //     lat: ski_areas[i].lat,
-        //     lng: ski_areas[i].lng
-        // };
-
-        // API.getWeather(lat_lng).then(function (data) {
-        //     console.log(data);
-        // });
-
         var resort = {
             name: resort_name,
             lat: ski_areas[i].lat,
             lng: ski_areas[i].lng
-            // weather: "",
-            // snowfall: 12,
-            // snowfall_pred: 6
         };
         console.log(resort);
         API.saveResort(resort).then(function() {refreshResorts()});

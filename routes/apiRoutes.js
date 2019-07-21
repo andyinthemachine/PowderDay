@@ -5,8 +5,6 @@ var moment = require('moment');
 
 moment().format();
 
-
-
 module.exports = function (app) {
   app.get("/api/resorts", function (req, res) {
     db.Resort.findAll({}).then(function (dbResorts) {
@@ -31,40 +29,59 @@ module.exports = function (app) {
   });
 }
 
-
 function weather_api(resort, cb) {
-  console.log("dskey: ", keys.dark_skies.api_key);
-  console.log(resort.lat.toFixed(6), resort.lng.toFixed(6));
-
-  // var first_run_backed_up = moment(first_run, "HH:mm").subtract(1, "years");
-  // console.log("Year " + moment(current_time).format("YYYY"));
-  // console.log("Month " + moment(current_time).format("MM"));
-  // console.log("DAY " + moment(current_time).format("DD"));
-
-  // var next_train = moment().add(minutes_away, "minutes").format('LT');
-
-  // var url = `https://api.darksky.net/forecast/${keys.dark_skies.api_key}/${resort.lat.toFixed(6)},${resort.lng.toFixed(6)}`;
 
   // [YYYY]-[MM]-[DD]T[HH]:[MM]:[SS]
-
-  var current_time = moment();
-
-  date_str = `,${moment(current_time).format("YYYY")}-${moment(current_time).format("MM")}-${moment(current_time).format("DD")}`;
-  date_str += "T12:00:00"
-
   var url = `https://api.darksky.net/forecast/${keys.dark_skies.api_key}/${resort.lat.toFixed(6)},${resort.lng.toFixed(6)}`;
-  url += date_str;
-  console.log(url);
-  axios.get(url).then(function (response) {
+  var time_str = "T12:00:00"
+  var current_day = moment();
+
+  //api hit for today
+  var date_str = `,${moment(current_day).format("YYYY")}-${moment(current_day).format("MM")}-${moment(current_day).format("DD")}`;
+  var url_today = url + date_str + time_str;
+
+  axios.get(url_today).then(function (response) {
     var res = response.data;
 
     resort.current_conditions = res.currently.summary;
-    var forecast_str = res.daily.data[0].precipType;
-    if (res.daily.data[0].precipAccumulation) 
-      forecasst_str += `: ${res.daily.data[0].precipAccumulation} in`;
 
+    var forecast_str = "no precipitation";
+    if (res.daily.data[0].precipType) {
+      forecast_str = res.daily.data[0].precipType;
+      if (res.daily.data[0].precipAccumulation)
+        forecasst_str += `: ${res.daily.data[0].precipAccumulation} in`;
+    }
     resort.precip_forecast = forecast_str;
-    cb(resort);
+
+    // api hit for prev day
+    var prev_day = moment(current_day).subtract(1, "days");
+    date_str = `,${moment(prev_day).format("YYYY")}-${moment(prev_day).format("MM")}-${moment(prev_day).format("DD")}`;
+    var url_prev_day = url + date_str + time_str;
+
+    console.log(resort.name);
+    console.log(url_prev_day);
+
+    axios.get(url_prev_day).then(function (response2) {
+      var res2 = response2.data;
+      var prev_day_str = "no precipitation";
+      if (res2.daily.data[0].precipType) {
+        prev_day_str = res2.daily.data[0].precipType;
+        if (res2.daily.data[0].precipAccumulation)
+          prev_day_str += `: ${res2.daily.data[0].precipAccumulation} in`;
+      }
+      resort.precip_prev_day = prev_day_str;
+      cb(resort);
+    })
+      .catch(function (error) {
+        if (error.response)
+          console.log(error.response);
+        else if (error.request)
+          console.log(error.request);
+        else
+          console.log("Error", error.message);
+
+        console.log(error.config);
+      });
   })
     .catch(function (error) {
       if (error.response)
@@ -77,3 +94,5 @@ function weather_api(resort, cb) {
       console.log(error.config);
     });
 }
+
+
