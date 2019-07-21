@@ -2,7 +2,7 @@
 var $resortList = $(".table-body");
 
 var API = {
-  saveResort: function(resort) {
+  saveResort: function (resort) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -12,46 +12,31 @@ var API = {
       data: JSON.stringify(resort)
     });
   },
-  getResorts: function() {
+  getResorts: function () {
     return $.ajax({
       url: "api/resorts",
       type: "GET"
     });
   },
-  deleteResort: function(id) {
+  deleteResort: function (id) {
     return $.ajax({
       url: "api/resorts/" + id,
       type: "DELETE"
     });
-  },
-  getKey: function(id) {  // works but not
-    return $.ajax({
-      url: "api/resorts/key",
-      type: "GET"
-    });
-  }  
+  }
 };
 
-
-// API.getKey().then(function(data){
-  // console.log(data);
-  // $("#google-init").attr("src", "'https://maps.googleapis.com/maps/api/js?key=' + data + '&callback=initMap&libraries=places'");
-// });
-
-
-var refreshResorts = function() {
-  API.getResorts().then(function(data) {
-    var $resorts = data.map(function(resort) {
+var refreshResorts = function () {
+  API.getResorts().then(function (data) {
+    var $resorts = data.map(function (resort) {
 
       var newRow = $("<tr>").addClass("resort-table");
-
-      // var newRow = $("<tr>").append(
-        newRow.append(
+      newRow.append(
         $("<td>").html(`<a style=color:red href=/resort/${resort.id}><strong>${resort.name}</strong>`),
-        $("<td>").html(`<strong>${resort.weather}</strong>`),
-        $("<td>").html(`<strong>${resort.snowfall}</strong>`),
-        $("<td>").html(`<strong>${resort.snowfall_pred}</strong>`),
-        $("<td>").attr({"data-id": resort.id}).html(`<button class="btn btn-warning delete">ｘ</button></td>`)
+        $("<td>").html(`<strong>${resort.current_conditions}</strong>`),
+        $("<td>").html(`<strong>${resort.precip_prev_day}</strong>`),
+        $("<td>").html(`<strong>${resort.precip_forecast}</strong>`),
+        $("<td>").attr({ "data-id": resort.id }).html(`<button class="btn btn-warning delete">ｘ</button></td>`)
       );
       return newRow;
     });
@@ -60,11 +45,9 @@ var refreshResorts = function() {
   });
 };
 
-var handleDeleteBtnClick = function() {
-  console.log("click");
+var handleDeleteBtnClick = function () {
   var idToDelete = $(this).parent().attr("data-id");
-  console.log(idToDelete);
-  API.deleteResort(idToDelete).then(function() {refreshResorts();});
+  API.deleteResort(idToDelete).then(function() {refreshResorts()});
 };
 
 $resortList.on("click", ".delete", handleDeleteBtnClick);
