@@ -14,14 +14,20 @@ module.exports = function (app) {
 
   // Create a new resorts table row
   app.post("/api/resorts", function (req, res) {
-    weather_api(req.body, function (resort) {
-      db.Resort.create(resort).then(function (dbResort) {
-        res.json(dbResort);
-      });
+    // don't create if already there
+    db.Resort.findOne({ where: { name: req.body.name } }).then(exists => {
+      if (exists)
+        res.send("exists");
+      else
+        weather_api(req.body, function (resort) {
+          db.Resort.create(resort).then(function (dbResort) {
+            res.json(dbResort);
+          });
+        });
     });
   });
 
-  // Delete an example by id
+  // Delete a resort by id
   app.delete("/api/resorts/:id", function (req, res) {
     db.Resort.destroy({ where: { id: req.params.id } }).then(function (dbResort) {
       res.json(dbResort);
@@ -43,18 +49,22 @@ function weather_api(resort, cb) {
 
   axios.get(url_today).then(function (response) {
     var res = response.data;
-
     // console.log(resort.name);
     // console.log(url_today);
 
     resort.current_conditions = res.currently.summary;
 
     var forecast_str = "no precipitation";
+
     if (res.daily.data[0].precipType) {
       forecast_str = res.daily.data[0].precipType;
-      if (res.daily.data[0].precipAccumulation)
-        forecasst_str += `: ${res.daily.data[0].precipAccumulation} in`;
+      if (forecast_str === "rain")
+        forecast_str += `: ${(res.daily.data[0].precipProbability * 100).toFixed(0)}%`;
+      else if (forecast_str === "snow")
+        if (res.daily.data[0].precipAccumulation)
+          forecasst_str += `: ${res.daily.data[0].precipAccumulation} in`;
     }
+
     resort.precip_forecast = forecast_str;
 
     // api hit for prev day
@@ -70,10 +80,14 @@ function weather_api(resort, cb) {
     axios.get(url_prev_day).then(function (response2) {
       var res2 = response2.data;
       var prev_day_str = "no precipitation";
+
       if (res2.daily.data[0].precipType) {
         prev_day_str = res2.daily.data[0].precipType;
-        if (res2.daily.data[0].precipAccumulation)
-          prev_day_str += `: ${res2.daily.data[0].precipAccumulation} in`;
+        if (prev_day_str === "rain")
+          prev_day_str += `: ${(res2.daily.data[0].precipIntensityMax).toFixed(2)} in`;
+        else if (forecast_str === "snow")
+          if (res2.daily.data[0].precipAccumulation)
+            prev_day_str += `: ${res2.daily.data[0].precipAccumulation} in`;
       }
       resort.precip_prev_day = prev_day_str;
       cb(resort);

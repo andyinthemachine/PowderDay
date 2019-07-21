@@ -48,8 +48,6 @@ function initMap() {
 $("#map").on("click", "#select-button", function () {
 
     var resort_name = $(this).attr("data-name");
-    // console.log(resort_name);
-    // console.log(ski_areas);
 
     found = false;
     i = 0;
@@ -58,13 +56,20 @@ $("#map").on("click", "#select-button", function () {
             found = true;
 
     if (found) {
+        var trunc_name = resort_name;
+        if (resort_name.length > 32) trunc_name = resort_name.slice(0, 31);
         var resort = {
-            name: resort_name,
+            name: trunc_name,
             lat: ski_areas[i].lat,
             lng: ski_areas[i].lng
         };
         console.log(resort);
-        API.saveResort(resort).then(function () { refreshResorts() });
+        API.saveResort(resort).then(function (data) {
+            if (data === "exists")
+                alert("resort already in list");
+            else
+                refreshResorts();
+        });
     } else
         console.log("resort not found");
 });
