@@ -62,7 +62,7 @@ function weather_api(resort, cb) {
         forecast_str += `: ${(res.daily.data[0].precipProbability * 100).toFixed(0)}%`;
       else if (forecast_str === "snow")
         if (res.daily.data[0].precipAccumulation)
-          forecasst_str += `: ${res.daily.data[0].precipAccumulation} in`;
+          forecast_str += `: ${res.daily.data[0].precipAccumulation} in`;
     }
 
     resort.precip_forecast = forecast_str;
