@@ -54,7 +54,7 @@ function weather_api(resort, cb) {
 
     resort.current_conditions = res.currently.summary;
 
-    var forecast_str = "no precipitation";
+    var forecast_str = "no precip";
 
     if (res.daily.data[0].precipType) {
       forecast_str = res.daily.data[0].precipType;
@@ -79,7 +79,7 @@ function weather_api(resort, cb) {
 
     axios.get(url_prev_day).then(function (response2) {
       var res2 = response2.data;
-      var prev_day_str = "no precipitation";
+      var prev_day_str = "no precip";
 
       if (res2.daily.data[0].precipType) {
         prev_day_str = res2.daily.data[0].precipType;

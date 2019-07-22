@@ -1,8 +1,9 @@
 
 
 var ski_areas = [];
+var geocoder = new google.maps.Geocoder();
 
-function initMap() {
+function initMap(location) {
 
     function Ski_area(name, lat, lng) {
         this.name = name;
@@ -31,13 +32,12 @@ function initMap() {
         }
     }
 
-    var copper = new google.maps.LatLng(39.5021, -106.1510);
     var infowindow = new google.maps.InfoWindow({});
 
-    var map = new google.maps.Map(document.getElementById('map'), { center: copper, zoom: 10 });
+    var map = new google.maps.Map(document.getElementById('map'), { center: location, zoom: 10 });
 
     var request = {
-        location: copper,
+        location: location,
         radius: 50000,
         keyword: ["ski", "area"]
     };
@@ -74,7 +74,31 @@ $("#map").on("click", "#select-button", function () {
         console.log("resort not found");
 });
 
-initMap();
+var $loc = $("#loc");
+
+var handleSubmitBtnClick = function () {
+
+    console.log("click");
+    var loc = $('#change-location').val().trim();
+    geocoder.geocode({ 'address': loc }, function (results, status) {
+        if (status == 'OK')
+            initMap(results[0].geometry.location);
+        else
+            alert('Geocode was not successful: ' + status);
+
+    });
+
+    console.log(loc);
+};
+
+$loc.on("click", "#submit-btn", handleSubmitBtnClick);
+
+
+
+
+// start out at copper mtn colorado
+var copper = new google.maps.LatLng(39.5021, -106.1510);
+initMap(copper);
 
 
 
