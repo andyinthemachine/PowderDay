@@ -1,7 +1,9 @@
 
 
 
-### **Powder Day App**   **Andrew Ulrich**
+### **Powder Day App**  
+
+#### **Author** **Andrew Ulrich**
 
 #### Application is Front end and Back end.
 
