@@ -49,8 +49,8 @@ function weather_api(resort, cb) {
 
   axios.get(url_today).then(function (response) {
     var res = response.data;
-    // console.log(resort.name);
-    // console.log(url_today);
+    console.log("weather 1", resort.name);
+    console.log(url_today);
 
     resort.current_conditions = res.currently.summary;
 
@@ -74,8 +74,8 @@ function weather_api(resort, cb) {
 
     var url_prev_day = url + date_str + time_str;
 
-    // console.log(resort.name);
-    // console.log(url_prev_day);
+    console.log("weather 2", resort.name);
+    console.log(url_prev_day);
 
     axios.get(url_prev_day).then(function (response2) {
       var res2 = response2.data;
@@ -85,7 +85,7 @@ function weather_api(resort, cb) {
         prev_day_str = res2.daily.data[0].precipType;
         if (prev_day_str === "rain")
           prev_day_str += `: ${(res2.daily.data[0].precipIntensityMax).toFixed(2)} in`;
-        else if (forecast_str === "snow")
+        else if (prev_day_str === "snow")
           if (res2.daily.data[0].precipAccumulation)
             prev_day_str += `: ${res2.daily.data[0].precipAccumulation} in`;
       }
