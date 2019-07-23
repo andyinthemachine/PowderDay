@@ -7,7 +7,7 @@
 
 ##### Front end/client side is HTML/CSS/Javascript/JQuery/Ajax
 
-###### Client side API: Google_Maps_Javascript_API/geocode_library/places_library
+###### Client side API: Google_Maps_Javascript_API/google_geocode_library/google_places_library
 
 ##### Back End/Sever side is Javascript/Express/Axios/Handelbars/Node.js
 
