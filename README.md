@@ -24,5 +24,4 @@
 
 #### Will report snow and/or rain, whichever present
 
-#### Makes API calls to Bands in Town for Concert Info, Spotify for song info, and IMDB for movie info
 
