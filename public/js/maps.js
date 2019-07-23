@@ -93,9 +93,6 @@ var handleSubmitBtnClick = function () {
 
 $loc.on("click", "#submit-btn", handleSubmitBtnClick);
 
-
-
-
 // start out at copper mtn colorado
 var copper = new google.maps.LatLng(39.5021, -106.1510);
 initMap(copper);
