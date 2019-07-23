@@ -85,7 +85,7 @@ function weather_api(resort, cb) {
         prev_day_str = res2.daily.data[0].precipType;
         if (prev_day_str === "rain")
           prev_day_str += `: ${(res2.daily.data[0].precipIntensityMax).toFixed(2)} in`;
-        else if (forecast_str === "snow")
+        else if (prev_day_str === "snow")
           if (res2.daily.data[0].precipAccumulation)
             prev_day_str += `: ${res2.daily.data[0].precipAccumulation} in`;
       }
