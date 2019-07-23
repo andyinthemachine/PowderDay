@@ -22,6 +22,6 @@
 
 #### Shows current conditions and precipitation data for the resorts chosen.
 
-#### Will report snow and/or rain, whichever present
+#### Reports snow and/or rain, whichever present
 
 
