@@ -72,7 +72,7 @@ function weather_api(resort, cb) {
     resort.precip_forecast = forecast_str;
 
     // api hit for prev day
-    var prev_day = moment(current_day).subtract(131, "days");
+    var prev_day = moment(current_day).subtract(1, "days");
     date_str = `,${moment(prev_day).format("YYYY")}-${moment(prev_day).format("MM")}-${moment(prev_day).format("DD")}`;
     time_str = "T12:00:00";
 
