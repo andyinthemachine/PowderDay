@@ -23,14 +23,19 @@ function initMap(location) {
         });
     }
 
+
     function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             for (var i = 0; i < results.length; i++) {
-                ski_areas.push(new Ski_area(results[i].name, results[i].geometry.location.lat(), results[i].geometry.location.lng()));
+                var lat_str = results[i].geometry.location.lat().toFixed(6);
+                var lng_str = results[i].geometry.location.lng().toFixed(6);
+                ski_areas.push(new Ski_area(results[i].name, Number(lat_str), Number(lng_str)));
                 createMarker(results[i]);
             }
         }
     }
+
+    ski_areas = [];
 
     var infowindow = new google.maps.InfoWindow({});
 
@@ -49,13 +54,20 @@ $("#map").on("click", "#select-button", function () {
 
     var resort_name = $(this).attr("data-name");
 
+    console.log("click:", resort_name);
+
+    // get index of resort clicked in ski-areas array
     found = false;
     i = 0;
     while (!found && i < ski_areas.length)
-        if (ski_areas[i++].name === resort_name)
+        if (ski_areas[i].name === resort_name)
             found = true;
+        else
+            i++;
 
     if (found) {
+        console.log("found");
+        console.log(ski_areas);
         var trunc_name = resort_name;
         if (resort_name.length > 32) trunc_name = resort_name.slice(0, 31);
         var resort = {
@@ -78,7 +90,6 @@ var $loc = $("#loc");
 
 var handleSubmitBtnClick = function () {
 
-    console.log("click");
     var loc = $('#change-location').val().trim();
     geocoder.geocode({ 'address': loc }, function (results, status) {
         if (status == 'OK')
@@ -87,8 +98,6 @@ var handleSubmitBtnClick = function () {
             alert('Geocode was not successful: ' + status);
 
     });
-
-    console.log(loc);
 };
 
 $loc.on("click", "#submit-btn", handleSubmitBtnClick);
