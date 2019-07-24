@@ -61,14 +61,18 @@ function weather_api(resort, cb) {
       if (forecast_str === "rain")
         forecast_str += `: ${(res.daily.data[0].precipProbability * 100).toFixed(0)}%`;
       else if (forecast_str === "snow")
-        if (res.daily.data[0].precipAccumulation)
-          forecast_str += `: ${res.daily.data[0].precipAccumulation} in`;
+        if (res.daily.data[0].precipAccumulation) {
+          if (res.daily.data[0].precipAccumulation < 0.2)
+            forecast_str += `: trace`;
+          else
+            forecast_str += `: ${res.daily.data[0].precipAccumulation.toFixed(1)} in`;
+        }
     }
 
     resort.precip_forecast = forecast_str;
 
     // api hit for prev day
-    var prev_day = moment(current_day).subtract(1, "days");
+    var prev_day = moment(current_day).subtract(131, "days");
     date_str = `,${moment(prev_day).format("YYYY")}-${moment(prev_day).format("MM")}-${moment(prev_day).format("DD")}`;
     time_str = "T12:00:00";
 
@@ -83,11 +87,17 @@ function weather_api(resort, cb) {
 
       if (res2.daily.data[0].precipType) {
         prev_day_str = res2.daily.data[0].precipType;
-        if (prev_day_str === "rain")
-          prev_day_str += `: ${(res2.daily.data[0].precipIntensityMax).toFixed(2)} in`;
+        if (prev_day_str === "rain") {
+          if (res2.daily.data[0].precipIntensityMax > 0.2)
+            prev_day_str += `: ${(res2.daily.data[0].precipIntensityMax).toFixed(1)} in`;
+        }
         else if (prev_day_str === "snow")
-          if (res2.daily.data[0].precipAccumulation)
-            prev_day_str += `: ${res2.daily.data[0].precipAccumulation} in`;
+          if (res2.daily.data[0].precipAccumulation) {
+            if (res2.daily.data[0].precipAccumulation < 0.2)
+              prev_day_str += `: trace`;
+            else
+              prev_day_str += `: ${res2.daily.data[0].precipAccumulation.toFixed(1)} in`;
+          }
       }
       resort.precip_prev_day = prev_day_str;
       cb(resort);
