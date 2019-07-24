@@ -63,7 +63,7 @@ function weather_api(resort, cb) {
       else if (forecast_str === "snow")
         if (res.daily.data[0].precipAccumulation) {
           if (res.daily.data[0].precipAccumulation < 0.2)
-            forecast_str += `: trace`;
+            forecast_str += `: tr`;
           else
             forecast_str += `: ${res.daily.data[0].precipAccumulation.toFixed(1)} in`;
         }
@@ -94,7 +94,7 @@ function weather_api(resort, cb) {
         else if (prev_day_str === "snow")
           if (res2.daily.data[0].precipAccumulation) {
             if (res2.daily.data[0].precipAccumulation < 0.2)
-              prev_day_str += `: trace`;
+              prev_day_str += `: tr`;
             else
               prev_day_str += `: ${res2.daily.data[0].precipAccumulation.toFixed(1)} in`;
           }
