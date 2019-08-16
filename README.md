@@ -3,7 +3,7 @@
 
 ### **Powder Day App**  
 
-#### **Author -** **Andrew Ulrich**  Brandon Norberg Jerry Dai
+#### **Author -** **Andrew Ulrich** 
 
 #### Application is Front end and Back end.
 
