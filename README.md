@@ -5,7 +5,7 @@
 
 #### **Author -** **Andrew Ulrich** 
 
-#### Application is Front end and Back end.
+#### Application is Full Stack.
 
 ##### Front end/client side is HTML/CSS/Javascript/JQuery/Ajax
 
