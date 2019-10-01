@@ -15,7 +15,7 @@
 
 ###### Server side API: Dark_Skies_weather_API  + Moment_npm_library
 
-##### Client side has data persistence using myQSL database.
+##### Client side has data persistence using mySQL database.
 
 
 #### Lets user compile a list of ski resorts from anywhere in the world. 

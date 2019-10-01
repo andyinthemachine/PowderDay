@@ -91,7 +91,10 @@ var $loc = $("#loc");
 var handleSubmitBtnClick = function () {
 
     var loc = $('#change-location').val().trim();
+    console.log("Here", loc);
     geocoder.geocode({ 'address': loc }, function (results, status) {
+        console.log("Here1");
+
         if (status == 'OK')
             initMap(results[0].geometry.location);
         else
